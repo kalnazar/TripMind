@@ -81,6 +81,23 @@ General tips:
 3. Run the web app (`npm run dev`).
 4. Point the mobile app to the same backend URL and run in Xcode.
 
+## Generating a Strong JWT Secret
+------------------------------
+The backend uses APP_JWT_SECRET to sign and verify tokens.
+Use a long, random, cryptographically secure value.
+
+Using OpenSSL:
+    openssl rand -base64 64
+
+Using Node.js:
+    node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+
+Using Linux/macOS built-ins:
+    head -c 64 /dev/urandom | base64
+
+Set the value:
+    export APP_JWT_SECRET="your-very-long-random-secret"
+
 ## Useful scripts
 - Backend: `./mvnw test`, `./mvnw spring-boot:run`
 - Web: `npm run dev`, `npm run build`, `npm run start`
