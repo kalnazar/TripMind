@@ -12,6 +12,7 @@ Thumbs.db
 .env.*
 *.env
 *.local
+!tripmind-web/.env.local
 tripmind-server/.env
 tripmind-server/.env.*
 tripmind-server/src/main/resources/application-local.properties
