@@ -11,3 +11,5 @@ pnpm dev
 # or
 bun dev
 ```
+
+We are making changes and trying to update the cloned project
