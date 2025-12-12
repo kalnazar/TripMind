@@ -1,5 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { CheckCircle } from "lucide-react";
+import { useAuth } from "@/app/providers/AuthProvider";
+import { PaymentDialog } from "@/components/ui/payment-dialog";
+import { Button } from "@/components/ui/button";
 
 const plans = [
   {
@@ -31,11 +37,43 @@ const plans = [
 ];
 
 export default function PlansPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  const [selectedPlan, setSelectedPlan] = useState<{
+    name: string;
+    price: string;
+  } | null>(null);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+
+  const handleGetStarted = (plan: { name: string; price: string }) => {
+    if (loading) return;
+
+    if (!user) {
+      router.push("/login?next=/plans");
+      return;
+    }
+
+    // For free plan, just redirect to create trip
+    if (plan.price === "Free") {
+      router.push("/create-new-trip");
+      return;
+    }
+
+    // For paid plans, show payment dialog
+    setSelectedPlan(plan);
+    setIsPaymentOpen(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    // After successful payment, redirect to create trip
+    router.push("/create-new-trip");
+  };
+
   return (
     <div className="flex flex-col items-center text-center py-16 px-6">
       <h1 className="text-4xl font-bold mb-6">Pricing Plans</h1>
       <p className="text-lg text-gray-600 mb-12 max-w-2xl">
-        Choose the plan that fits your travel style. Whether it’s a weekend
+        Choose the plan that fits your travel style. Whether it's a weekend
         getaway or a world tour, Trip<span className="text-primary">Mind</span>{" "}
         has you covered.
       </p>
@@ -57,12 +95,29 @@ export default function PlansPage() {
                 </li>
               ))}
             </ul>
-            <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">
+            <Button
+              onClick={() => handleGetStarted(plan)}
+              className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90"
+              disabled={loading}
+            >
               Get Started
-            </button>
+            </Button>
           </div>
         ))}
       </div>
+
+      {selectedPlan && (
+        <PaymentDialog
+          isOpen={isPaymentOpen}
+          onClose={() => {
+            setIsPaymentOpen(false);
+            setSelectedPlan(null);
+          }}
+          planName={selectedPlan.name}
+          planPrice={selectedPlan.price}
+          onPaymentSuccess={handlePaymentSuccess}
+        />
+      )}
     </div>
   );
 }

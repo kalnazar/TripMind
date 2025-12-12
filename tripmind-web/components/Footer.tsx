@@ -20,17 +20,17 @@ export default function Footer() {
           <h3 className="text-sm font-semibold mb-3">Explore</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
-              <Link href="/destinations" className="hover:text-primary">
-                Destinations
+              <Link href="/plans" className="hover:text-primary">
+                Plans
               </Link>
             </li>
             <li>
-              <Link href="/plan-a-trip" className="hover:text-primary">
+              <Link href="/create-new-trip" className="hover:text-primary">
                 Plan a Trip
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:text-primary">
+              <Link href="/about-us" className="hover:text-primary">
                 About Us
               </Link>
             </li>
@@ -42,17 +42,17 @@ export default function Footer() {
           <h3 className="text-sm font-semibold mb-3">Resources</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
-              <Link href="/faq" className="hover:text-primary">
-                FAQ
+              <Link href="/my-itineraries" className="hover:text-primary">
+                My Itineraries
               </Link>
             </li>
             <li>
-              <Link href="/blog" className="hover:text-primary">
-                Blog
+              <Link href="/plans" className="hover:text-primary">
+                Pricing
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-primary">
+              <Link href="/contact-us" className="hover:text-primary">
                 Contact
               </Link>
             </li>
