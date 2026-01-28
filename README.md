@@ -5,6 +5,7 @@ AI-powered trip planner built by KBTU students. The stack consists of a Spring B
 ## Repository layout
 - `tripmind-server/` — Spring Boot (Java 21, Maven)
 - `tripmind-web/` — Next.js 15 App Router frontend
+- `tripmind-admin/` — Vite + React admin panel
 - `tripmind-mobile/` — SwiftUI client
 
 ## Prerequisites
@@ -48,7 +49,16 @@ npm run dev
 ```
 We keep a ready-to-use `tripmind-web/.env.local` in the repo so local setup is zero-config. Update values there if your backend URL or Cloudinary credentials differ.
 
-### 3) Mobile (SwiftUI)
+### 3) Admin panel (Vite + React)
+```bash
+cd tripmind-admin
+npm install
+npm run dev
+# visit http://localhost:5173
+```
+The admin panel reads `VITE_BACKEND_URL` from `tripmind-admin/.env`. Update it if your backend is running on a different host/port.
+
+### 4) Mobile (SwiftUI)
 1. Open `tripmind-mobile/trip-mind-mobile.xcodeproj` in Xcode (we keep `Info.plist` with default `API_BASE_URL` checked in).
 2. If you run on a physical device, change `API_BASE_URL` in `Info.plist` to your machine IP (e.g., `http://192.168.x.x:8080`).
 3. Run on simulator/device (`⌘ + R`). JWT is stored in Keychain via `AuthManager`.
@@ -79,7 +89,8 @@ General tips:
 1. Start PostgreSQL.
 2. Run the backend (`./mvnw spring-boot:run`).
 3. Run the web app (`npm run dev`).
-4. Point the mobile app to the same backend URL and run in Xcode.
+4. Run the admin panel (`npm run dev`).
+5. Point the mobile app to the same backend URL and run in Xcode.
 
 ## Generating a Strong JWT Secret
 ------------------------------
@@ -101,5 +112,4 @@ Set the value:
 ## Useful scripts
 - Backend: `./mvnw test`, `./mvnw spring-boot:run`
 - Web: `npm run dev`, `npm run build`, `npm run start`
-
 
