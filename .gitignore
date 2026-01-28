@@ -1,0 +1,48 @@
+# macOS
+.DS_Store
+Thumbs.db
+
+# Editors/IDE
+.idea/
+.vscode/
+*.iml
+
+# Environment & secrets
+.env
+.env.*
+*.env
+*.local
+!tripmind-web/.env.local
+tripmind-server/.env
+tripmind-server/.env.*
+tripmind-server/src/main/resources/application-local.properties
+tripmind-mobile/trip-mind-mobile/Config/*.env
+
+# Node / Next.js
+tripmind-web/node_modules/
+tripmind-web/.next/
+tripmind-web/out/
+tripmind-web/.turbo/
+npm-debug.log*
+yarn-error.log*
+
+# Java / Maven
+**/target/
+*.class
+*.log
+
+# Swift / Xcode
+**/DerivedData/
+**/build/
+*.xcuserstate
+*.xcuserdata/
+*.xccheckout
+*.moved-aside
+*.ipa
+*.dSYM*
+Pods/
+
+# Coverage / reports
+**/coverage/
+**/.nyc_output/
+
